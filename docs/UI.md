@@ -20,6 +20,7 @@ This Next.js app mirrors [metrum-ai/bench-cli](https://github.com/metrum-ai/benc
 | `src/components/cli/*` | Form workbench + field renderer |
 | `src/app/api/run` | SSE process runner (allowlisted binaries) |
 | `src/app/api/binary` | PATH probe for Run button |
+| `src/lib/cli/binaries.ts` | Centralized `ALLOWED_BINARIES` + `isAllowedBinary()` guard shared by the run/binary routes |
 
 ## Argv rules
 
@@ -59,4 +60,4 @@ nvm use 24
 npm test
 ```
 
-Serializer contracts live in `src/lib/cli/argv.test.ts` (quickstart shape, mutual exclusion, SLOs, `--runs` placement, omit-defaults) and `src/lib/cli/commands/asr-imagegen.test.ts` (ASR `--input`/concurrency/normalizer defaults, imagegen prompt exclusivity and size default).
+Serializer contracts live in `src/lib/cli/argv.test.ts` (quickstart shape, mutual exclusion, SLOs, `--runs` placement, omit-defaults), `src/lib/cli/commands/llm-vlm.test.ts`, `src/lib/cli/commands/asr-imagegen.test.ts` (ASR `--input`/concurrency/normalizer defaults, imagegen prompt exclusivity and size default), `src/lib/cli/commands/prompts-strategic.test.ts`, and `src/lib/cli/commands/utilities.test.ts`. The run/binary allowlist is covered by `src/lib/cli/binaries.test.ts` and `src/app/api/run/route.test.ts`.
