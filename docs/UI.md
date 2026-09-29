@@ -59,4 +59,4 @@ nvm use 24
 npm test
 ```
 
-Serializer contracts live in `src/lib/cli/argv.test.ts` (quickstart shape, mutual exclusion, SLOs, `--runs` placement, omit-defaults).
+Serializer contracts live in `src/lib/cli/argv.test.ts` (quickstart shape, mutual exclusion, SLOs, `--runs` placement, omit-defaults) and `src/lib/cli/commands/asr-imagegen.test.ts` (ASR `--input`/concurrency/normalizer defaults, imagegen prompt exclusivity and size default).
