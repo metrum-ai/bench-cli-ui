@@ -1,18 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
 import { spawn } from "node:child_process";
+import { isAllowedBinary } from "@/lib/cli/binaries";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
-const ALLOWED = new Set([
-  "metrum-ai-bench-cli",
-  "metrum-ai-bench-cli-strategic",
-  "metrum-ai-bench-cli-mock-server",
-]);
-
 export async function GET(req: NextRequest) {
   const name = req.nextUrl.searchParams.get("name") ?? "";
-  if (!ALLOWED.has(name)) {
+  if (!isAllowedBinary(name)) {
     return NextResponse.json({ available: false, error: "not allowed" });
   }
 

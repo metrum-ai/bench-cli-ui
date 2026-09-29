@@ -1,14 +1,9 @@
 import { spawn } from "node:child_process";
 import { NextRequest } from "next/server";
+import { isAllowedBinary } from "@/lib/cli/binaries";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
-
-const ALLOWED = new Set([
-  "metrum-ai-bench-cli",
-  "metrum-ai-bench-cli-strategic",
-  "metrum-ai-bench-cli-mock-server",
-]);
 
 function resolveBinary(name: string): Promise<string | null> {
   return new Promise((resolve) => {
@@ -37,7 +32,7 @@ export async function POST(req: NextRequest) {
   const binary = body.binary;
   const args = body.args ?? [];
 
-  if (!binary || !ALLOWED.has(binary)) {
+  if (!binary || !isAllowedBinary(binary)) {
     return new Response(JSON.stringify({ error: "binary not allowed" }), {
       status: 400,
     });
