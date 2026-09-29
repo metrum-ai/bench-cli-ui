@@ -108,7 +108,11 @@ export const asrCommand: CommandDef = {
     ...sharedLoadFields({
       concurrencyDefault: 10,
       numRequestsRequired: false,
-    }),
+    }).map((field) =>
+      field.key === "concurrency"
+        ? { ...field, omitWhenDefault: true }
+        : field,
+    ),
     ...sharedPublishFields(),
     ...sharedAdvancedFields({ logLevelDefault: "info" }),
   ],
