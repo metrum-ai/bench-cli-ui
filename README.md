@@ -1,36 +1,56 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Metrum AI Bench CLI Web UI
 
-## Getting Started
+Operator console for [`metrum-ai/bench-cli`](https://github.com/metrum-ai/bench-cli) **1.5.1**.
 
-First, run the development server:
+Configure every CLI command with typed defaults, live argv preview, and optional local Run when `metrum-ai-bench-cli` is on `PATH`.
+
+## Requirements
+
+- Node.js **24+** (via [nvm](https://github.com/nvm-sh/nvm): `nvm use 24`)
+- Optional: a built/installed `metrum-ai-bench-cli` on `PATH` for Run
+
+## Quick start
 
 ```bash
+source ~/.nvm/nvm.sh && nvm use 24
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The app listens on **`http://0.0.0.0:23456`**.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+curl -sf http://127.0.0.1:23456 >/dev/null && echo ok
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Scripts
 
-## Learn More
+| Script | Purpose |
+|--------|---------|
+| `npm run dev` | Next.js dev server on `0.0.0.0:23456` |
+| `npm run build` | Production build |
+| `npm run start` | Production server on `0.0.0.0:23456` |
+| `npm test` | Vitest (argv serializer contracts) |
+| `npm run lint` | ESLint |
 
-To learn more about Next.js, take a look at the following resources:
+## Commands covered
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+See [docs/UI.md](docs/UI.md) for the full field catalog. Nav groups:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **Modalities:** LLM, VLM, ASR, Imagegen
+- **Workloads:** Prompts, Strategic
+- **Utilities:** Preflight, SUT init, Compare, Selftest, Mock server
 
-## Deploy on Vercel
+## Security
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- API keys use password inputs and are sent only to the local `/api/run` process.
+- `/api/run` allowlists binaries: `metrum-ai-bench-cli`, `metrum-ai-bench-cli-strategic`, `metrum-ai-bench-cli-mock-server`.
+- Do not commit secrets, endpoint credential files, or run logs with keys.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Theme
+
+Metrum dark theme from [www.metrum.ai](https://www.metrum.ai): black background, Geist / Poppins / Geist Mono, brand gradient `#FF3132 → #FE005F → #EE0089 → #CC28AF → #9948CB → #465CDA`.
+
+## License
+
+Apache-2.0 aligned with bench-cli. Metrum AI trademarks belong to Metrum AI, Inc.
